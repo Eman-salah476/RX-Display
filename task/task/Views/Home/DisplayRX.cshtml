@@ -1,0 +1,61 @@
+﻿@using task.Models
+@model List<RX_details> 
+@{
+    ViewBag.Title = "DisplayRX";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mx-lg-auto my-lg-5 my-4 Rx" id="RX">
+   <div class="row header p-lg-4">
+       <div class="col-lg-5">
+           <h5>Dr:</h5><h5>@ViewBag.RX.Clinic.Doctor.name</h5><br />
+           <p class="text-center">@ViewBag.RX.Clinic.Doctor.speciality</p>
+       </div>
+       <div class="col-lg-5">
+           <h5>Name: </h5><h6>@ViewBag.RX.Patient.name</h6>
+          <br /><h5>Date: </h5><p>@ViewBag.RX.date.ToString("MM/dd/yyyy")</p>
+       </div>
+   </div>
+    <hr />
+
+    <div class="py-4 px-2 content">
+        <h1>R:</h1><br />
+                   <div class="medicine px-3">
+                       <ul>
+                           @foreach (var item in Model)
+                           {
+                           <li>
+                               <h6>Medicine: </h6>
+                               <p>@item.Medicine.name</p><br />
+                               <h6>Dos: </h6>
+                               <p>@item.dosage /day</p>
+                           </li>
+                          
+                           }
+                       </ul>
+                   </div>
+    </div>
+   <hr />
+    <div class="py-3">
+      <h6>Address: </h6><p>@ViewBag.RX.Clinic.address</p>
+        <br />
+        <h6>Mobile: </h6><p>@ViewBag.RX.Clinic.mobile</p>
+    </div>
+   
+
+</div>
+
+<div class="row justify-content-center">
+  
+    <div class="mx-2">
+        @Html.ActionLink("Back", "Index", null, new { @class = "btn btn-primary" })
+    </div>
+    <div class="mx-2">
+        <button class="btn btn-primary" onclick="window.print()">Print</button>
+
+    </div>
+
+</div>
+
+
+

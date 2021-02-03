@@ -1,0 +1,90 @@
+﻿body {
+    font-size:0.95em;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+h1, h2, h3, h4, h5, h6, p {
+    display: inline-block;
+    padding:3px;
+}
+.Rx{
+    border:1px solid grey;
+    border-radius:5px;
+    width:65%;
+}
+.Rx .content{
+}
+
+    .Rx .content .medicine ul{
+        list-style-type:square;
+    }
+    .Rx .content h1 {
+        color: dodgerblue;
+        font-size: 40px;
+    }
+   .button{
+       margin-left:auto;
+   }
+
+.filter label{
+  font-size:0.9em;
+    font-weight:500;
+    padding-right:10px;
+}
+.filter input{
+    border:1px solid grey;
+    border-radius:5px;
+    padding:7px;
+}
+
+
+  @media print {
+        body *{
+           visibility:hidden;
+       }
+
+       #RX *{
+           visibility:visible;
+       }
+   }
+
+@media only screen and (max-width: 500px){
+    body {
+        font-size: 0.95em;
+    }
+    table{
+        font-size: 0.75em;
+    }
+ table .btn,.filter label {
+            font-size: 0.95em;
+        }
+
+table span {
+            display: none;
+        }
+   .Rx{
+       width:100%;
+   }
+   h4,h5,h6{
+       font-size:0.98em;
+   }
+}

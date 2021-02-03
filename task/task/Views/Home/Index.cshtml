@@ -1,0 +1,175 @@
+﻿@using task.Models
+@model List<RX>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@*There are two ways i used them to filter the search, you can try both but remember to
+    comment one of them and it's method in the controller*@
+
+
+
+@*
+<div class="container filter my-4 py-3">
+
+    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+    {
+        <div class="row filter2 py-3">
+            <div class="col-lg-3 py-2">
+                <label class="">Doctor:</label><input type="text" list="drlist" placeholder="Search.." name="doctorName" />
+                <datalist id="drlist">
+                    <option value="" selected disabled>Select Doctor..</option>
+                    @foreach (var item in (List<Doctor>)ViewBag.doctors)
+                    {
+                        <option>@item.name</option>
+                    }
+                </datalist>
+            </div>
+            <div class="col-lg-3 py-2">
+                <label class="">Patient:</label><input type="text" placeholder="Search.." name="patientName" />
+
+            </div>
+            <div class="col-lg-4 py-2">
+                <label class="">Mobile :</label><input type="text" placeholder="Search.." name="mobile" />
+
+            </div>
+        </div>
+        <div class="row filter1 py-3">
+            <div class="col-lg-6 col-7">
+
+                <label>From :</label><input type="date" name="startdate" />
+                <label class="pl-2">To :</label><input type="date" name="enddate" />
+            </div>
+            <div class="col-lg-2 col-2 my-auto"> <input type="submit" value="Search" class="btn btn-success" /> </div>
+        </div>
+    }
+</div>*@
+
+@*// this is another way to filter the search by making
+    a filter in the result of the search by date range  *@
+
+
+    <div class="container filter my-4 py-3">
+
+            @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+            {
+            <div class="row filter1 py-3">
+                <div class="col-lg-6 col-7">
+
+                    <label >From :</label><input type="date" name="startdate" />
+                    <label class="pl-2">To :</label><input type="date" name="enddate" />
+                </div>
+                <div class="col-lg-2 col-2 my-auto"> <input type="submit" value="Search" class="btn btn-success" /> </div>
+            </div>
+                    }
+
+
+                <div class="row filter2 py-3">
+                    <div class="col-lg-3 py-2">
+                        <label class="">Doctor:</label><input type="search" list="drlist" placeholder="Search.." id="searchtxt" class="" />
+                        <datalist id="drlist">
+                            <option value="" selected disabled>Select Doctor..</option>
+                            @foreach (var item in (List<Doctor>)ViewBag.doctors)
+                            {
+                                <option>@item.name</option>
+                            }
+                        </datalist>
+                    </div>
+                    <div class="col-lg-3 py-2">
+                        <label class="">Patient:</label><input type="search" placeholder="Search.." id="searchtxt2" class="" />
+
+                    </div>
+                    <div class="col-lg-4 py-2">
+                        <label class="">Mobile :</label><input type="search" placeholder="Search.." id="searchtxt3" class="" />
+
+                    </div>
+                </div>
+            </div>
+
+
+
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Doctor</th>
+                <th scope="col">Clinic</th>
+                <th scope="col">Date</th>
+                <th scope="col">Patient</th>
+                <th scope="col">Mobile</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.Id</th>
+                    <td>@item.Clinic.Doctor.name</td>
+                    <td>@item.Clinic.address</td>
+                    <td>@item.date.ToString("MM/dd/yyyy")</td>
+                    <td>@item.Patient.name</td>
+                    <td>@item.Patient.mobile</td>
+                    <td><span>| </span>@Html.ActionLink("Details", "DisplayRX", new { RXId = item.Id }, new { @class = "btn btn-link" })</td>
+
+                </tr>
+            }
+
+        </tbody>
+
+    </table>
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+
+<script>
+
+    $("#searchtxt").on("keyup", function () {
+        var search = $(this).val();
+        $("table tr").each(function (result) {
+            if (result !== 0) {
+                var id = $(this).find("td:nth-child(2)").text();
+                if (id.indexOf(search) !== 0 && id.toLowerCase().indexOf(search.toLowerCase()) < 0) {
+                    $(this).hide();
+
+                }
+                else {
+                    $(this).show();
+                }
+            }
+        });
+    });
+    $("#searchtxt2").on("keyup", function () {
+        var search = $(this).val();
+        $("table tr").each(function (result) {
+            if (result !== 0) {
+                var id = $(this).find("td:nth-child(5)").text();
+                if (id.indexOf(search) !== 0 && id.toLowerCase().indexOf(search.toLowerCase()) < 0) {
+                    $(this).hide();
+
+                }
+                else {
+                    $(this).show();
+                }
+            }
+        });
+    });
+
+    $("#searchtxt3").on("keyup", function () {
+        var search = $(this).val();
+        $("table tr").each(function (result) {
+            if (result !== 0) {
+                var id = $(this).find("td:nth-child(6)").text();
+                if (id.indexOf(search) !== 0 && id.toLowerCase().indexOf(search.toLowerCase()) < 0) {
+                    $(this).hide();
+
+                }
+                else {
+                    $(this).show();
+                }
+            }
+        });
+    });
+</script>
